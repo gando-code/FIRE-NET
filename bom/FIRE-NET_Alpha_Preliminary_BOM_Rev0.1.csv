@@ -1,0 +1,53 @@
+Subsystem,Item,Function,Qty,Alpha Priority,Resilience Role,Selection Status,Notes
+Edge Core,Industrial MCU,Deterministic supervisory and safe-state control,1,P0,Independent essential-control domain,TBD,"Select automotive/industrial-temperature device with watchdog and ECC where practical"
+Edge Core,Linux-capable SoM/SBC,Edge analytics sensor fusion logging and UI,1,P0,High-level compute isolated from essential controller,TBD,"Do not make safe-state behavior dependent on this processor"
+Edge Core,Hardware watchdog / supervisor,Independent reset and brownout supervision,1,P0,Recovery from compute lockup,TBD,"Independent of application processor"
+Edge Core,Secure element or TPM,Device identity key protection and measured-security functions,1,P1,Cyber-resilience,TBD,"Use supported secure provisioning workflow"
+Edge Core,Industrial Ethernet interface,Wired high-bandwidth communications,1,P0,Primary service/debug and deterministic network path,TBD,"Protected external interface"
+Edge Core,CAN-FD transceiver,Robot and payload bus,2,P0,Redundant/local control communications,TBD,"Prefer protected or isolated implementation where justified"
+Edge Core,RS-485 transceiver,Rugged sensor and instrument interface,2,P1,Long-cable field interface,TBD,"Protected/isolated implementation where justified"
+Edge Core,Nonvolatile storage,Local telemetry and event logging,1,P0,Store-and-forward operation,TBD,"Industrial eMMC or high-endurance storage preferred"
+Edge Core,RTC and timebase,Offline timestamping and event correlation,1,P1,Operation without network time,TBD,
+Power,Primary LiFePO4 battery system,Portable primary energy source,1,P0,Stable field power,TBD,"Pack must use appropriate certified cells/BMS and enclosure"
+Power,Battery management system,Cell monitoring protection and state estimation,1,P0,Electrical and thermal protection,TBD,"Prefer pack-integrated safety features"
+Power,Protected DC input stage,Input power conditioning,1,P0,Reverse polarity overvoltage and transient protection,TBD,"Final topology depends on power architecture"
+Power,DC/DC conversion,Generate isolated/non-isolated system rails,3,P0,Domain separation and regulated power,TBD,"Exact rails TBD after load budget"
+Power,Reserve essential-power source,Short-duration power for safety MCU essential sensing and beacon,1,P1,Graceful degradation,TBD,"Architecture study item; may use secondary battery or hold-up system"
+Power,Current/voltage monitors,Power telemetry and fault diagnostics,3,P1,Early fault detection,TBD,
+Protection,TVS protection,Clamp transients on exposed low-voltage interfaces,As req.,P0,ESD/EFT/surge design provision,TBD,"Select only after interface voltage/current and EMC target defined"
+Protection,Common-mode filtering,Reduce conducted common-mode interference,As req.,P1,EMI immunity/emissions control,TBD,"Validate by test; avoid indiscriminate filtering"
+Protection,Galvanic isolation,Separate selected external communication/power domains,As req.,P1,Ground-fault/common-mode resilience,TBD,"Use where system grounding analysis justifies it"
+Protection,Shielded conductive enclosure,Rugged electronics housing and electromagnetic shielding,1,P0,EMI/ESD/environmental protection,TBD,"Bonding and penetrations require engineering; shielding alone is not 'EMP proof'"
+Protection,EMC cable glands / shielded backshells,Controlled cable shield termination,As req.,P1,Limit coupling through enclosure penetrations,TBD,"Use 360-degree shield termination where appropriate"
+Protection,Chassis bonding hardware,Low-impedance enclosure/subassembly bonding,As req.,P0,EMC/ESD/lightning-transient design provision,TBD,"Material compatibility and corrosion control required"
+Sensing,Radiometric thermal imager,Quantitative thermal mapping,1,P0,Independent thermal situational awareness,TBD,"Research-grade accuracy requirements TBD"
+Sensing,Visible-light camera,Scene context and inspection,1,P0,Sensor diversity,TBD,
+Sensing,Independent temperature probes,Reference thermal measurements,2,P0,Cross-check thermal imagery,TBD,"Select probes for expected test range"
+Sensing,Environmental sensor suite,Temperature humidity pressure and selected gases,1,P1,Environmental characterization,TBD,"Gas sensors must be selected for defined hazards; no universal gas sensor assumed"
+Sensing,Particulate/smoke research sensor,Research telemetry,1,P1,Combustion-environment characterization,TBD,"Not a certified life-safety detector"
+Sensing,IMU,Robot attitude and motion sensing,1,P0,Navigation and state estimation,TBD,
+Sensing,Depth camera or LiDAR,Mapping obstacle sensing and standoff estimation,1,P1,Navigation redundancy,TBD,
+Sensing,Acoustic sensor array,Environmental/acoustic research measurement,1,P2,Experimental sensing channel,TBD,"Measurement only in Alpha; no high-power acoustic actuation"
+Communications,Wi-Fi/Ethernet communications module,Local high-bandwidth link,1,P0,Primary telemetry,TBD,
+Communications,Cellular modem,Optional wide-area telemetry,1,P2,Communications diversity,TBD,"Carrier and deployment dependent"
+Communications,Low-bandwidth backup telemetry radio,Essential status/health channel,1,P2,Graceful degradation,TBD,"Frequency and regulatory requirements TBD"
+Robotics,Tracked mobile base,Portable remote research carrier,1,P1,Remote standoff operation,TBD,"Commercial research chassis preferred for Alpha"
+Robotics,Motor controllers,Closed-loop traction control,2,P1,Mobility,TBD,"Use rated commercial controllers with current/thermal protection"
+Robotics,Encoders,Drive feedback,2,P1,Closed-loop motion,TBD,
+Robotics,Hardware emergency stop,Immediate human-controlled motion/actuation inhibit,2,P0,Primary physical safety function,TBD,"Hardwired architecture preferred"
+Robotics,Payload interface,Standardized mechanical power and data interface,1,P0,Modularity and isolation,TBD,"Initial Alpha interface should be low-energy instrumentation focused"
+Mechanical,Rugged field enclosure,Portable Field Node housing,1,P0,Ingress impact and service protection,TBD,"Environmental rating is a design target until tested"
+Mechanical,Internal mounting plate / DIN structure,Serviceable component mounting,1,P0,Maintainability,TBD,
+Mechanical,Thermal management assembly,Manage electronics heat,1,P0,Reliability,TBD,"Passive-first where feasible; validate worst-case thermal load"
+Human Interface,Rugged operator tablet/laptop,Responder-supervised command and telemetry,1,P0,Human oversight,TBD,"Use commercial device for Alpha"
+Human Interface,Local status indicators,Power health fault and safe-state indication,1,P0,Degraded-mode visibility,TBD,
+Research Interface,Instrumented low-energy payload emulator,Validate modular I/O without suppression actuation,1,P0,Safe integration testing,TBD,"Use dummy loads/simulated actuation for Rev-A"
+Research Interface,Precision low-water research interface,Future controlled-lab payload interface,1,P2,Modular suppression research,TBD,"No operational claim; qualified fire-lab testing only"
+Research Interface,Inert-gas research interface,Future controlled-lab instrumentation interface,1,P3,Modular suppression research,TBD,"Agent delivery hardware intentionally excluded from public Alpha BOM"
+Research Interface,Acoustic research interface,Future controlled-lab instrumentation interface,1,P3,Experimental research,TBD,"High-power actuation hardware intentionally excluded from public Alpha BOM"
+Research Interface,Electric-field research interface,Future controlled-lab instrumentation interface,1,P3,Experimental research,TBD,"High-voltage actuation hardware intentionally excluded from public Alpha BOM"
+Research Interface,Smart-material test fixture interface,Interchangeable material coupon/cartridge instrumentation,1,P2,Materials research,TBD,"Material chemistry and deployment mechanisms outside Alpha BOM"
+Research Interface,Thermal-recovery instrumentation interface,Measure heat-flow concepts in controlled research,1,P3,Energy/thermal research,TBD,"No energy-recovery performance claim"
+Validation,Bench power supply / electronic load,Controlled electrical development and load testing,1,P0,Repeatable bench validation,TBD,
+Validation,Oscilloscope / logic analyzer,Electrical and protocol debugging,1,P0,Verification,TBD,
+Validation,Environmental/EMC pre-compliance access,Third-party or partner lab testing,As needed,P1,ESD/RF/transient validation,TBD,"Plan tests against applicable product/environment requirements; standards do not by themselves certify FIRE-NET"
